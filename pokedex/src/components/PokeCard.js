@@ -44,13 +44,19 @@ const Card = styled.div`
   height: 150px;
   border-radius: 10px;
   padding: 5px;
+
+  img{
+    width: 150px;
+  }
 `;
 
-export const PokeCard = () => {
+export const PokeCard = (props) => {
   return (
     <>
       <CardContainer>
-        <Card></Card>
+        <Card>
+          <img src={props.pokemon && props.pokemon.sprites.other['official-artwork'].front_default}/>
+        </Card>
         <ButtonContainer>
           <button>Adicionar para pokedex</button>
           <button>Ver detalhes</button>
