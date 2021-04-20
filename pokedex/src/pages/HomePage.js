@@ -1,18 +1,16 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { goToPokedexPage } from '../Routes/Coordinator'
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { goToPokedexPage } from "../Routes/Coordinator";
 
 const HomePage = () => {
-    const history = useHistory()
-    return (
+  const history = useHistory();
+  return (
     <div>
+      <h1>home page</h1>
 
-    <h1>home page</h1>
-
-    <button onClick={ () => goToPokedexPage(history)}>POKEDEX</button>
-
+      <button onClick={() => goToPokedexPage(history)}>POKEDEX</button>
     </div>
-    );
+  );
 };
 
-export default HomePage
+export default HomePage;
