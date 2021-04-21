@@ -45,7 +45,7 @@ const Card = styled.div`
   border-radius: 10px;
   padding: 5px;
 
-  img{
+  img {
     width: 150px;
   }
 `;
@@ -55,7 +55,9 @@ export const PokeCard = (props) => {
     <>
       <CardContainer>
         <Card>
-          <img src={props.pokemon && props.pokemon.sprites.other['official-artwork'].front_default}/>
+          <img
+            src={props.pokemon.sprites.other["official-artwork"].front_default}
+          />
         </Card>
         <ButtonContainer>
           <button>Adicionar para pokedex</button>
