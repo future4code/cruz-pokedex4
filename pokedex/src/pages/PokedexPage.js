@@ -7,7 +7,6 @@ const PokedexPage = () => {
   return (
     <div>
       <h1>pokedex</h1>
-
       <button onClick={() => goToHomePage(history)}>HOME</button>
     </div>
   );
