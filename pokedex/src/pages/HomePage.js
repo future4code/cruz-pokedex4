@@ -5,7 +5,7 @@ import styled from "styled-components";
 import PokeCard from "../components/PokeCard";
 import Header from "../components/Header";
 import Pokedex from "../components/img/Pokedex.jpg";
-import axios from "axios"
+import axios from "axios";
 
 const GridCardContainer = styled.div`
   background-image: url(${Pokedex});
@@ -24,46 +24,46 @@ const GridCardContainer = styled.div`
 const HomePage = () => {
   const history = useHistory();
 
-  const [pokeName, setPokeName] = useState([])
-  const [pokemons, setPokemons] = useState([])
+  const [pokeName, setPokeName] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
-    .then(res => {
-      setPokeName(res.data.results)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }, [])
-
-  useEffect(() => {
-  const newArray = []    
-  pokeName.forEach((item) => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${item.name}`)
-    .then(res => {
-      newArray.push(res.data)
-      const ordenedArray = newArray.sort((a,b) => {
-        return a.id - b.id
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
+      .then((res) => {
+        setPokeName(res.data.results);
       })
-    setPokemons(ordenedArray)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  })
-  }, [pokeName])
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  console.log("data", pokemons)
+  useEffect(() => {
+    if (pokeName.length) {
+      pokeName.forEach((item) => {
+        axios
+          .get(`https://pokeapi.co/api/v2/pokemon/${item.name}`)
+          .then((res) => {
+            setPokemons((prev) =>
+              [...prev, res.data].sort((a, b) => a.id - b.id)
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    }
+  }, [pokeName]);
 
   return (
     <div>
       <Header />
       <button onClick={() => goToPokedexPage(history)}>POKEDEX</button>
       <GridCardContainer>
-       {pokemons && pokemons.map(poke => {
-         return <PokeCard key={poke.id} pokemon={poke}/>
-       })}
+        {pokemons &&
+          pokemons.map((poke) => {
+            return <PokeCard pokemon={poke} />;
+          })}
       </GridCardContainer>
     </div>
   );
