@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { goToPokedexPage } from "../Routes/Coordinator";
 import styled from "styled-components";
 import PokeCard from "../components/PokeCard";
 import Header from "../components/Header";
 import Pokedex from "../components/img/Pokedex.jpg";
-import axios from "axios";
+import PokemonsContext from "../contexts/PokemonsContext";
 
 const GridCardContainer = styled.div`
   background-image: url(${Pokedex});
@@ -23,37 +23,7 @@ const GridCardContainer = styled.div`
 
 const HomePage = () => {
   const history = useHistory();
-
-  const [pokeName, setPokeName] = useState([]);
-  const [pokemons, setPokemons] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
-      .then((res) => {
-        setPokeName(res.data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (pokeName.length) {
-      pokeName.forEach((item) => {
-        axios
-          .get(`https://pokeapi.co/api/v2/pokemon/${item.name}`)
-          .then((res) => {
-            setPokemons((prev) =>
-              [...prev, res.data].sort((a, b) => a.id - b.id)
-            );
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
-    }
-  }, [pokeName]);
+  const {pokemons} = useContext(PokemonsContext)
 
   return (
     <div>

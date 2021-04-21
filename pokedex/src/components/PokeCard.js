@@ -4,8 +4,8 @@ import styled from "styled-components";
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 250px;
-  height: 250px;
+  width: 246px;
+  height: 262px;
   align-items: center;
   justify-content: center;
   background-color: white;
@@ -30,21 +30,24 @@ const ButtonContainer = styled.div`
 
   & > button {
     background-color: red;
-    width: 110px;
+    width: 102px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 6px;
     margin: 5px;
     color: white;
     border: none;
+    z-index: 100;
   }
 `;
 const Card = styled.div`
   background-color: #32bad9;
-  width: 200px;
-  height: 150px;
+  width: 204px;
+  height: 167px;
   border-radius: 10px;
   padding: 5px;
-
+  display: grid;
+  justify-content: center;
+  align-items: center;
   img {
     width: 150px;
   }
