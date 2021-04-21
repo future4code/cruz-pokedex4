@@ -6,6 +6,7 @@ import PokeCard from "../components/PokeCard";
 import Header from "../components/Header";
 import Pokedex from "../components/img/Pokedex.jpg";
 import PokemonsContext from "../contexts/PokemonsContext";
+import Tilt from 'react-parallax-tilt';
 
 const GridCardContainer = styled.div`
   background-image: url(${Pokedex});
@@ -32,7 +33,7 @@ const HomePage = () => {
       <GridCardContainer>
         {pokemons &&
           pokemons.map((poke) => {
-            return <PokeCard pokemon={poke} />;
+            return <Tilt><PokeCard pokemon={poke} /></Tilt>;
           })}
       </GridCardContainer>
     </div>

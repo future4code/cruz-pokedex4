@@ -37,6 +37,7 @@ const ButtonContainer = styled.div`
     color: white;
     border: none;
     z-index: 100;
+    cursor: pointer;
   }
 `;
 const Card = styled.div`
