@@ -17,7 +17,8 @@ const HeaderPage = styled.header`
   height: 60px;
   background: #d92525;
   width: 100%;
-  position: fixed;
+  top: 0;
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: center;
