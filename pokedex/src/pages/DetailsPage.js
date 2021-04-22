@@ -20,7 +20,7 @@ const PhotoContainer = styled.div`
 
   & > div:nth-child(2) {
     display: flex;
-    background-color: brown;
+    background-color: pink;
     height: 220px;
     margin: 50px;
     width: 220px;
