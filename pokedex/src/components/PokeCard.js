@@ -36,7 +36,6 @@ const ButtonContainer = styled.div`
     margin: 5px;
     color: white;
     border: none;
-    z-index: 100;
     cursor: pointer;
   }
 `;
