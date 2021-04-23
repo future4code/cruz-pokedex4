@@ -4,33 +4,28 @@ import { useHistory } from "react-router-dom";
 import { goToPokedexPage } from "../Routes/Coordinator";
 
 const Header = ({ leftButtonFunction, title, showRightButton }) => {
-  const History = useHistory()
+  const History = useHistory();
 
   const leftButtonTitle = () => {
     switch (title) {
-      case "Lista de Pokemons": 
+      case "Lista de Pokemons":
         return "Pokedex";
-      case "Pokedex": 
+      case "Pokedex":
         return "Voltar para lista de Pokemons";
-      default: return "Voltar"
+      default:
+        return "Voltar";
     }
-  }
+  };
 
   return (
     <HeaderPage>
+      <LeftButton onClick={leftButtonFunction}>{leftButtonTitle()}</LeftButton>
 
-      <LeftButton onClick={leftButtonFunction}>
-          { leftButtonTitle() }
-      </LeftButton>
+      <h1>{title}</h1>
 
-        <h1>{title}</h1>
-
-      { showRightButton && (
-        <RightButton onClick={ () => goToPokedexPage() }>
-          Pokedex
-        </RightButton>
+      {showRightButton && (
+        <RightButton onClick={() => goToPokedexPage()}>Pokedex</RightButton>
       )}
-
     </HeaderPage>
   );
 };
@@ -46,14 +41,15 @@ const HeaderPage = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+  z-index: 1;
+`;
 
 const LeftButton = styled.button`
   position: absolute;
   left: 20px;
-`
-  
+`;
+
 const RightButton = styled.button`
   position: absolute;
   right: 20px;
-`
+`;

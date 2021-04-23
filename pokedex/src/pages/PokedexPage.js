@@ -16,17 +16,18 @@ const GridCardContainer = styled.div`
   row-gap: 30px;
   justify-items: center;
   padding: 20px;
+  width: 100%;
+  height: 100vh;
 `;
-
 
 const PokedexPage = () => {
   const history = useHistory();
   return (
     <div>
-      <Header 
-        title={"Pokedex"} 
-        leftButtonFunction={ () => goToHomePage(history)} 
-        />
+      <Header
+        title={"Pokedex"}
+        leftButtonFunction={() => goToHomePage(history)}
+      />
 
       <GridCardContainer />
     </div>
