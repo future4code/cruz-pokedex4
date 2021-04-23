@@ -24,19 +24,13 @@ const GridCardContainer = styled.div`
 const HomePage = () => {
   const history = useHistory();
   const { pokemons } = useContext(PokemonsContext);
-  const button = (
-    <button
-      onClick={() => {
-        goToPokedexPage(history);
-      }}
-    >
-      POKEDEX
-    </button>
-  );
-
+  
   return (
     <div>
-      <Header button={button} />
+      <Header 
+        title={"Lista de Pokemons"} 
+        leftButtonFunction={ () => goToPokedexPage(history)} 
+        />
 
       <GridCardContainer>
         {pokemons &&
