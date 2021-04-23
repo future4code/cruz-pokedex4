@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
@@ -52,20 +53,23 @@ const TypeMovesContainer = styled.div`
 `;
 
 const DetailsPage = () => {
+  const history = useHistory();
   const params = useParams();
   const {pokemons} = useContext(PokemonsContext)
 
   return (
     <>
-      <Header />
+      <Header leftButtonFunction={ () => history.goBack() } showRightButton />
+      
+          
       <GridContainer>
         <PhotoContainer>
           <div>
             
-            <img src={pokemons && pokemons[params.id-1].sprites.front_default} />
+            <img alt="foto" src={pokemons && pokemons[params.id-1].sprites.front_default} />
           </div>
           <div>
-            <img src={pokemons && pokemons[params.id-1].sprites.back_default} />
+            <img alt="foto" src={pokemons && pokemons[params.id-1].sprites.back_default} />
           </div>
         </PhotoContainer>
         <StatsContainer>
