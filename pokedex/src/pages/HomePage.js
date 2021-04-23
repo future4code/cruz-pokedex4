@@ -6,7 +6,7 @@ import PokeCard from "../components/PokeCard";
 import Header from "../components/Header";
 import Pokedex from "../components/img/Pokedex.jpg";
 import PokemonsContext from "../contexts/PokemonsContext";
-import Tilt from 'react-parallax-tilt';
+import Tilt from "react-parallax-tilt";
 
 const GridCardContainer = styled.div`
   background-image: url(${Pokedex});
@@ -24,18 +24,29 @@ const GridCardContainer = styled.div`
 
 const HomePage = () => {
   const history = useHistory();
-  const {pokemons} = useContext(PokemonsContext)
-  const button = <button onClick={() => {goToPokedexPage(history)}}>POKEDEX</button>
+  const { pokemons } = useContext(PokemonsContext);
+  const button = (
+    <button
+      onClick={() => {
+        goToPokedexPage(history);
+      }}
+    >
+      POKEDEX
+    </button>
+  );
 
   return (
     <div>
+      <Header button={button} />
 
-      <Header button = {button}/>
-      
       <GridCardContainer>
         {pokemons &&
           pokemons.map((poke) => {
-            return <Tilt><PokeCard pokemon={poke} /></Tilt>;
+            return (
+              <Tilt>
+                <PokeCard pokemon={poke} id={poke.id} />
+              </Tilt>
+            );
           })}
       </GridCardContainer>
     </div>

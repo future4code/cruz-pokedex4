@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const CardContainer = styled.div`
   display: flex;
@@ -54,6 +55,11 @@ const Card = styled.div`
 `;
 
 export const PokeCard = (props) => {
+  const history = useHistory();
+  const goToDetailPage = (id) => {
+    history.push(`/detalhes/${id}`);
+  };
+
   return (
     <>
       <CardContainer>
@@ -64,7 +70,13 @@ export const PokeCard = (props) => {
         </Card>
         <ButtonContainer>
           <button>Adicionar para pokedex</button>
-          <button>Ver detalhes</button>
+          <button
+            onClick={() => {
+              goToDetailPage(props.id);
+            }}
+          >
+            Ver detalhes
+          </button>
         </ButtonContainer>
       </CardContainer>
     </>
