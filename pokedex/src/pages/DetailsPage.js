@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import PokemonsContext from "../contexts/PokemonsContext";
 
 const GridContainer = styled.div`
@@ -53,30 +52,8 @@ const TypeMovesContainer = styled.div`
 `;
 
 const DetailsPage = () => {
-  const [pokemon, setPokemon] = useState({});
-  const [hp, setHp] = useState("");
-  const [attack, setAttack] = useState("");
-  const [defense, setDefense] = useState("");
-  const [specialAttack, setSpecialAttack] = useState("");
-  const [specialDefense, setSpecialDefense] = useState("");
-  const [speed, setSpeed] = useState("");
-
   const params = useParams();
-
-  useEffect(() => {
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
-      .then((res) => {
-        localStorage.setItem("poke", JSON.stringify(res.data));
-      })
-      .catch(() => {});
-  }, []);
-
-  let pokemonString = localStorage.getItem("pokemon");
-  let pokemonObj = JSON.parse(pokemonString);
-  //console.log(pokemonObj);
-  setPokemon({ ...pokemon, pokemonObj });
-  console.log(pokemon);
+  const {pokemons} = useContext(PokemonsContext)
 
   return (
     <>
@@ -84,21 +61,23 @@ const DetailsPage = () => {
       <GridContainer>
         <PhotoContainer>
           <div>
-            <img src={pokemon.sprites.front_default} />
+            
+            <img src={pokemons && pokemons[params.id-1].sprites.front_default} />
           </div>
           <div>
-            <img src={pokemon.sprites.back_default} />
+            <img src={pokemons && pokemons[params.id-1].sprites.back_default} />
           </div>
         </PhotoContainer>
         <StatsContainer>
           <h1>Poderes</h1>
           <div>
-            <p>Hp:</p>
-            <p>Attack:</p>
-            <p>Defense:</p>
-            <p>Special-attack:</p>
-            <p>special-defense:</p>
-            <p>speed:</p>
+          {pokemons &&
+              pokemons[params.id-1].stats.map(stat => {
+                return(
+                  <p>{stat.stat.name}: <span>{stat.base_stat}</span></p>
+                )
+              })
+            }
           </div>
         </StatsContainer>
         <TypeMovesContainer>
