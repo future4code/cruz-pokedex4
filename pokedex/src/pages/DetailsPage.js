@@ -67,10 +67,15 @@ const DetailsPage = () => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
       .then((res) => {
-        setPokemon(res.data);
+        localStorage.setItem("poke", JSON.stringify(res.data));
       })
       .catch(() => {});
-  });
+  }, []);
+
+  let pokemonString = localStorage.getItem("pokemon");
+  let pokemonObj = JSON.parse(pokemonString);
+  //console.log(pokemonObj);
+  setPokemon({ ...pokemon, pokemonObj });
   console.log(pokemon);
 
   return (
