@@ -62,18 +62,34 @@ export const PokeCard = (props) => {
   
   const addToPokedex = () => {
     const newPokedex = [...pokedex]
-    const newPokemon = pokemons.filter((item) => {
-      return item.id === props.pokemon.id;
-    });
-    newPokedex.push(newPokemon)
-    
+    pokemons.forEach(pkm => {
+      if (pkm.id === props.pokemon.id) {
+        newPokedex.push(pkm)
+      }
+    })
+        
     const pokemonsList = pokemons.filter(pkm => {
       return pkm.id !== props.pokemon.id
     })
-
+    
     setPokedex(newPokedex)
     setPokemons(pokemonsList)
   }
+
+  const removeFromPokedex = () => {
+    const newPokedex = [...pokedex]
+    const removePokemon = pokedex.findIndex(pkm => {
+      return pkm.id === props.pokemon.id
+    })
+    newPokedex.splice(removePokemon, 1)
+    const pokemonsList = pokemons.filter(pkm => true)
+
+    setPokedex(newPokedex)
+    setPokemons(pokemonsList)
+    console.log(removePokemon)
+  }
+
+  console.log(pokedex)
 
   return (
     <>
@@ -85,13 +101,10 @@ export const PokeCard = (props) => {
         </Card>
         <ButtonContainer>
           <button onClick={addToPokedex}>Adicionar para pokedex</button>
-          <button
-            onClick={() => {
-              goToDetailsPage(history, props.pokemon.id)
-            }}
-          >
+          <button onClick={() => {goToDetailsPage(history, props.pokemon.id)}}>
             Ver detalhes
           </button>
+          <button onClick={removeFromPokedex}>Remover</button>
         </ButtonContainer>
       </CardContainer>
     </>
