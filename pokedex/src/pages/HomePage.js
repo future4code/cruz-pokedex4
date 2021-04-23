@@ -18,7 +18,6 @@ const GridCardContainer = styled.div`
   column-gap: 15px;
   row-gap: 30px;
   justify-items: center;
-  margin-top: 37px;
   padding: 20px;
 `;
 

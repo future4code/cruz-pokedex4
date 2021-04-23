@@ -5,6 +5,7 @@ import PokemonsContext from "./PokemonsContext";
 const PokemonsGlobal = (props) => {
 const [pokeName, setPokeName] = useState([]);
 const [pokemons, setPokemons] = useState([]);
+const [pokedex, setPokedex] = useState([]);
 
 useEffect(() => {
   axios
@@ -36,7 +37,9 @@ useEffect(() => {
 
     const data = {
         pokemons,
-        setPokemons
+        setPokemons,
+        pokedex,
+        setPokedex
     }
 
     return (

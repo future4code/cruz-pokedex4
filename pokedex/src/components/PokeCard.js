@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { goToDetailsPage } from "../Routes/Coordinator";
+import PokemonsContext from "../contexts/PokemonsContext";
 
 const CardContainer = styled.div`
   display: flex;
@@ -56,11 +58,22 @@ const Card = styled.div`
 
 export const PokeCard = (props) => {
   const history = useHistory();
-  const goToDetailPage = (id) => {
+  const { pokemons, setPokemons, pokedex, setPokedex } = useContext(PokemonsContext)
+  
+  const addToPokedex = () => {
+    const newPokedex = [...pokedex]
+    const newPokemon = pokemons.filter((item) => {
+      return item.id === props.pokemon.id;
+    });
+    newPokedex.push(newPokemon)
+    
+    const pokemonsList = pokemons.filter(pkm => {
+      return pkm.id !== props.pokemon.id
+    })
 
-    history.push(`/detalhes/${id}`);
-  };
-  };
+    setPokedex(newPokedex)
+    setPokemons(pokemonsList)
+  }
 
   return (
     <>
@@ -71,10 +84,10 @@ export const PokeCard = (props) => {
           />
         </Card>
         <ButtonContainer>
-          <button>Adicionar para pokedex</button>
+          <button onClick={addToPokedex}>Adicionar para pokedex</button>
           <button
             onClick={() => {
-              goToDetailPage(props.id);
+              goToDetailsPage(history, props.pokemon.id)
             }}
           >
             Ver detalhes
