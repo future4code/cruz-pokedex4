@@ -57,7 +57,9 @@ const Card = styled.div`
 export const PokeCard = (props) => {
   const history = useHistory();
   const goToDetailPage = (id) => {
+
     history.push(`/detalhes/${id}`);
+  };
   };
 
   return (
