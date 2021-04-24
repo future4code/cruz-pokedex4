@@ -42,8 +42,8 @@ const PokedexPage = () => {
       {pokedex &&
           pokedex.map((poke) => {
             return (
-              <Tilt>
-                <PokeCard isDetail={isTrue} key={poke.id} pokemon={poke} id={poke.id} />
+              <Tilt key={poke.id}>
+                <PokeCard isDetail={isTrue} pokemon={poke} id={poke.id} />
               </Tilt>
             );
           })}
