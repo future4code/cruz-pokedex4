@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { goToHomePage } from "../Routes/Coordinator";
 import Header from "../components/Header";
 import styled from "styled-components";
+import PokeCard from "../components/PokeCard"
 import Pokedex from "../components/img/Pokedex.jpg";
+import PokemonsContext from "../contexts/PokemonsContext";
+import Tilt from "react-parallax-tilt"
 
 const GridCardContainer = styled.div`
   background-image: url(${Pokedex});
@@ -16,20 +19,35 @@ const GridCardContainer = styled.div`
   row-gap: 30px;
   justify-items: center;
   padding: 20px;
-  width: 100%;
   height: 100vh;
 `;
 
 const PokedexPage = () => {
   const history = useHistory();
+  const [isTrue, setIsTrue] = useState(false)
+  useEffect(() => {
+    setIsTrue(true)
+  }, [])
+
+  const {pokedex} = useContext(PokemonsContext)
+
   return (
     <div>
       <Header
+        isTrue={isTrue}
         title={"Pokedex"}
         leftButtonFunction={() => goToHomePage(history)}
       />
-
-      <GridCardContainer />
+      <GridCardContainer>
+      {pokedex &&
+          pokedex.map((poke) => {
+            return (
+              <Tilt>
+                <PokeCard isDetail={isTrue} key={poke.id} pokemon={poke} id={poke.id} />
+              </Tilt>
+            );
+          })}
+      </GridCardContainer>
     </div>
   );
 };
