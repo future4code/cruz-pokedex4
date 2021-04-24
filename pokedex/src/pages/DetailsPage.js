@@ -56,29 +56,28 @@ const DetailsPage = () => {
   const history = useHistory();
   const params = useParams();
   const {pokemons} = useContext(PokemonsContext)
+  const index = (params.id-1)
 
   return (
     <>
       <Header leftButtonFunction={ () => history.goBack() } showRightButton />
-      
-          
       <GridContainer>
         <PhotoContainer>
           <div>
             
-            <img alt="foto" src={pokemons && pokemons[params.id-1].sprites.front_default} />
+            <img alt="foto" src={pokemons.length && pokemons[index].sprites.front_default} />
           </div>
           <div>
-            <img alt="foto" src={pokemons && pokemons[params.id-1].sprites.back_default} />
+            <img alt="foto" src={pokemons.length && pokemons[index].sprites.back_default} />
           </div>
         </PhotoContainer>
         <StatsContainer>
           <h1>Poderes</h1>
           <div>
-          {pokemons &&
-              pokemons[params.id-1].stats.map(stat => {
+          {pokemons.length &&
+              pokemons[index].stats.map(stat => {
                 return(
-                  <p>{stat.stat.name}: <span>{stat.base_stat}</span></p>
+                  <p key={stat.stat.name}>{stat.stat.name}: <span>{stat.base_stat}</span></p>
                 )
               })
             }

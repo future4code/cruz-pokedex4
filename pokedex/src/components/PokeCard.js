@@ -24,7 +24,7 @@ const ButtonContainer = styled.div`
   margin-top: 10px;
 
   & > button:nth-child(1) {
-    background-color: #22a940;
+    background-color: ${props => props.isDetail ? '#d92525' : '#22a940'};
   }
 
   & > button:nth-child(2) {
@@ -32,14 +32,48 @@ const ButtonContainer = styled.div`
   }
 
   & > button {
-    background-color: red;
     width: 102px;
     height: 40px;
     border-radius: 6px;
     margin: 5px;
+    line-height: 1;
     color: white;
     border: none;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    z-index: -2;
+    
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .2);
+    transition: all .4s;
+    border-radius: 6px;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    transition: .3s all ease;
+    &:before {
+      width: 100%;
+    }
+  }
   }
 `;
 const Card = styled.div`
@@ -56,21 +90,22 @@ const Card = styled.div`
   }
 `;
 
+
 export const PokeCard = (props) => {
   const history = useHistory();
   const { pokemons, setPokemons, pokedex, setPokedex } = useContext(PokemonsContext)
   
   const addToPokedex = () => {
     const newPokedex = [...pokedex]
-    pokemons.forEach(pkm => {
-      if (pkm.id === props.pokemon.id) {
-        newPokedex.push(pkm)
-      }
-    })
+    newPokedex.push(props.pokemon)
         
     const pokemonsList = pokemons.filter(pkm => {
       return pkm.id !== props.pokemon.id
     })
+    props.setPkmName(props.pokemon.name)
+    props.setSprite(props.pokemon.sprites.other["official-artwork"].front_default)
+    alertOpen()
+    alertClose()
     
     setPokedex(newPokedex)
     setPokemons(pokemonsList)
@@ -82,14 +117,19 @@ export const PokeCard = (props) => {
       return pkm.id === props.pokemon.id
     })
     newPokedex.splice(removePokemon, 1)
-    const pokemonsList = pokemons.filter(pkm => true)
+    const pokemonsList = [...pokemons, props.pokemon].sort((a,b) => a.id -b.id)
 
     setPokedex(newPokedex)
     setPokemons(pokemonsList)
-    console.log(removePokemon)
   }
 
-  console.log(pokedex)
+  const alertOpen = () => {
+    props.setAlert(true);
+  };
+
+  const alertClose = () => {
+    setTimeout(() => props.setAlert(false), 3000);
+  };
 
   return (
     <>
@@ -99,12 +139,11 @@ export const PokeCard = (props) => {
             src={props.pokemon.sprites.other["official-artwork"].front_default}
           />
         </Card>
-        <ButtonContainer>
-          <button onClick={addToPokedex}>Adicionar para pokedex</button>
+        <ButtonContainer isDetail={props.isDetail}>
+          <button onClick={props.isDetail ? removeFromPokedex : addToPokedex}>{props.isDetail ? 'Remover' : 'Adicionar na pokedex'}</button>
           <button onClick={() => {goToDetailsPage(history, props.pokemon.id)}}>
             Ver detalhes
           </button>
-          <button onClick={removeFromPokedex}>Remover</button>
         </ButtonContainer>
       </CardContainer>
     </>
