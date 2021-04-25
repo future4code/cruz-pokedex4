@@ -1,3 +1,6 @@
+![2021-04-25 (3)](https://user-images.githubusercontent.com/77751963/116011790-3e920d00-a5fd-11eb-9147-651c6ce0cb57.png)
+![2021-04-25 (4)](https://user-images.githubusercontent.com/77751963/116011795-3fc33a00-a5fd-11eb-8d62-a38f0d241d00.png)
+![2021-04-25 (5)](https://user-images.githubusercontent.com/77751963/116011798-418cfd80-a5fd-11eb-857b-0209cb3008d3.png)
 # POKEDEX
 
 Nome dos integrantes: 
