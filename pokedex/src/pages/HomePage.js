@@ -72,6 +72,8 @@ const AlertSuccess = styled.div`
   } 
 `
 
+
+
 const HomePage = () => {
   const history = useHistory();
   const { pokemons } = useContext(PokemonsContext);
