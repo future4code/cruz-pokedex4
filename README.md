@@ -5,8 +5,7 @@ Nome dos integrantes:
 - Igor Meira
 - Paula Lopes
 
-Link do Surge: www.link.com.br
-
+Link do Surge: http://boring-record.surge.sh/
 O que funciona:
 - Item 1
 - Item 2
