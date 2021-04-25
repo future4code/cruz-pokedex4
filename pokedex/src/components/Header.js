@@ -20,12 +20,18 @@ const Header = ({ leftButtonFunction, title, showRightButton, isTrue }) => {
 
   return (
     <HeaderPage>
-      <LeftButton isTrue={isTrue} onClick={leftButtonFunction}><img src={Pokeball} alt="pokeball"/>{leftButtonTitle()}</LeftButton>
-      
+      <LeftButton isTrue={isTrue} onClick={leftButtonFunction}>
+        <img src={Pokeball} alt="pokeball" />
+        {leftButtonTitle()}
+      </LeftButton>
+
       <h1>{title}</h1>
 
       {showRightButton && (
-        <RightButton onClick={() => goToPokedexPage(history)}><img src={Pokeball} alt="pokeball"/>Pokedex</RightButton>
+        <RightButton onClick={() => goToPokedexPage(history)}>
+          <img src={Pokeball} alt="pokeball" />
+          Pokedex
+        </RightButton>
       )}
     </HeaderPage>
   );
@@ -37,7 +43,7 @@ const spin = keyframes`
 to {
   transform: rotate(360deg)
 }
-`
+`;
 
 const HeaderPage = styled.header`
   height: 70px;
@@ -52,10 +58,10 @@ const HeaderPage = styled.header`
   z-index: 1;
 
   & > h1 {
-    margin: 0; 
+    margin: 0;
     font-size: 36px;
     font-weight: 600;
-    color: #f7f7f7; 
+    color: #f7f7f7;
   }
 `;
 
@@ -63,7 +69,7 @@ const LeftButton = styled.button`
   position: absolute;
   left: 20px;
   background-color: #f7f7f7;
-  width: ${props => props.isTrue ? '230px' : '150px'};
+  width: ${(props) => (props.isTrue ? "230px" : "150px")};
   height: 35px;
   text-align: right;
   padding-right: 18px;
@@ -75,7 +81,7 @@ const LeftButton = styled.button`
   cursor: pointer;
   :hover {
     transition: all 0.3s ease-in;
-    color: #DE2222;
+    color: #de2222;
     img {
       animation: ${spin} 1s ease;
     }
@@ -106,7 +112,7 @@ const RightButton = styled.button`
   cursor: pointer;
   :hover {
     transition: all 0.3s ease-in;
-    color: #DE2222;
+    color: #de2222;
     img {
       animation: ${spin} 1s ease;
     }
