@@ -19,7 +19,8 @@ const PhotoContainer = styled.div`
 
   & > div:nth-child(1) {
     display: flex;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
     height: 200px;
     margin: 50px;
     width: 200px;
@@ -29,19 +30,19 @@ const PhotoContainer = styled.div`
 
   & > div:nth-child(2) {
     display: flex;
-    background-color: pink;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
     height: 200px;
     margin: 50px;
     width: 200px;
     border-radius: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background-color: white;
+    border: 1px solid white;
   }
 `;
 
 const StatsContainer = styled.div`
   display: flex;
-  background-color: red;
   flex-direction: column;
   margin: 20px;
   height: 450px;
@@ -49,6 +50,8 @@ const StatsContainer = styled.div`
   border-radius: 10px;
   font-weight: 600;
   background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -86,29 +89,30 @@ const TypeMovesContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: yellow;
     height: 100px;
     margin: 20px;
     width: 450px;
     display: flex;
     border-radius: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
 
     & > p {
       margin: 20px;
       font-size: 20px;
+      background-color: ${(props) => props.color};
     }
   }
 
   & > div:nth-child(2) {
-    background-color: brown;
     height: 300px;
     margin: 20px;
     width: 450px;
     border-radius: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
 
     & > p {
       margin: 10px;
@@ -131,13 +135,10 @@ const DetailsPage = () => {
       .catch(() => {});
   }, []);
 
-  console.log(pokemon);
-
   const getMovesNames = () => {
     let nameMove =
       pokemon.moves &&
       pokemon.moves.map((move) => {
-        console.log(move);
         return move.move.name;
       });
 
@@ -146,8 +147,6 @@ const DetailsPage = () => {
 
     return [moveNames];
   };
-
-  console.log(getMovesNames());
 
   const getSelectedMoves = () => {
     let selectedMoves = [];
@@ -163,7 +162,6 @@ const DetailsPage = () => {
   };
 
   const getTypes = () => {
-    console.log(pokemon.types);
     let pokemonsType =
       pokemon.types &&
       pokemon.types.map((type) => {

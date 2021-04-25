@@ -77,7 +77,7 @@ const ButtonContainer = styled.div`
   }
 `;
 const Card = styled.div`
-  background-color: #32bad9;
+background-color:${props => props.color};
   width: 204px;
   height: 167px;
   border-radius: 10px;
@@ -90,6 +90,15 @@ const Card = styled.div`
   }
 `;
 
+const colorBg = {
+  grass: "#96c44e",
+  flying: "#b2babd",
+  water: "#32bad9;",
+  poison: "#b97fc9",
+  fire: "#fd7d24",
+  bug: "#729f3f",
+  normal: "gray",
+};
 
 export const PokeCard = (props) => {
   const history = useHistory();
@@ -134,7 +143,7 @@ export const PokeCard = (props) => {
   return (
     <>
       <CardContainer>
-        <Card>
+        <Card color={colorBg[props.pokemon.types[0].type.name]}>
           <img
             src={props.pokemon.sprites.other["official-artwork"].front_default}
           />
